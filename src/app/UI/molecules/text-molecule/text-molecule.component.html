@@ -1,0 +1,17 @@
+
+
+<div [class]="textMoleculeClass " class="shadow-lg border rounded p-5">
+    <div [class]="imageContainerClass ??'flex items-center'">
+        <app-image-atom *ngIf="showImage" [source]="source" [alt]="alt" [className]="imageClass"></app-image-atom>
+        <div [class]="textHeaderClass ?? 'font-extrabold'">{{textHeader}}</div>
+        <ng-content></ng-content>
+    </div>
+    
+    <hr class="mt-5 mb-5">
+    <app-text-atom [className]="textClass" [text]="text"><ng-content></ng-content>  </app-text-atom>
+   
+   <div class="my-3">Price: $ {{price}} </div>
+  
+  <button class="bg-blue w-36 text-white rounded p-2 font-bold" (click)="payCourse(price)">Buy</button>   
+</div>
+

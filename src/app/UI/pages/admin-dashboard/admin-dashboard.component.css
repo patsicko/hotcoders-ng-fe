@@ -1,0 +1,6 @@
+
+.custom-box {
+    box-shadow: 4px 4px 8px  #a9b4fa,-4px -4px 8px white;
+    border: 2px solid;
+    border-radius: 5px;
+  }

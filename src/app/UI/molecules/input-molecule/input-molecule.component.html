@@ -1,0 +1,30 @@
+
+<div *ngIf="inputProps.type==='text' || inputProps.type==='email' || inputProps.type==='password' || inputProps.type==='file'">
+
+ 
+<div class="mt-5 w-full">
+    <label class="mb-5" [for]="">{{inputProps.label}}</label>
+        
+    <app-input-atom [type]="inputProps.type" [className]="inputProps.className" [placeholder]="inputProps.placeholder" [controlName]="inputProps.controlName" [groupName]="groupName" ></app-input-atom>
+</div>
+  
+</div>
+
+
+<ng-container *ngIf="inputProps.type === 'textarea'">
+   
+<div class="mt-5 w-full">
+    <label class="" [for]="inputProps.controlName">{{ inputProps.label }}</label>
+    <!-- <app-textarea-atom [groupName]="groupName" [controlName]="inputProps.controlName" [className]="inputProps.className" [cols]="cols" [rows]="rows"></app-textarea-atom> -->
+    <app-quill-input-atom [groupName]="groupName" [controlName]="inputProps.controlName" [className]="inputProps.className" [quillConfigurationModule]="quillConfigurationModule" ></app-quill-input-atom>
+</div>
+   
+
+    
+</ng-container>
+
+<div *ngIf="inputProps.type==='checkbox'">
+
+    <app-checkbox-atom [type]="inputProps.type" [label]="inputProps.label" [controlName]="inputProps.controlName" [groupName]="groupName" [className]="inputProps.className"> </app-checkbox-atom>
+
+</div>

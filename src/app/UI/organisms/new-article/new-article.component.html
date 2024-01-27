@@ -1,0 +1,22 @@
+
+<div class="absolute left-1/4  w-1/2 top-24  border h-auto p-10 rounded-xl bg-white text-2xl" >
+    
+    <div class="text-3xl font-black text-greenish">Create new Article</div>
+    <fa-icon [icon]="closeIcon" (click)="closeArticleForm(false)" class=" absolute right-0 px-10 top-5 text-3xl font-black text-red cursor-pointer"></fa-icon>
+
+    <app-input-molecule [inputProps]="coverPhotoInput" [groupName]="newArticle"  ></app-input-molecule>
+     <app-input-molecule [inputProps]="blogTitleInput" [groupName]="newArticle" ></app-input-molecule>
+     <app-input-molecule [inputProps]="blogDescription" [groupName]="newArticle" ></app-input-molecule>
+     <app-input-molecule [inputProps]="blogPrice" [groupName]="newArticle" ></app-input-molecule>
+  
+
+     <div class="w-full">
+        <app-input-molecule [inputProps]="blogContent" [groupName]="newArticle" [quillConfigurationModule]="QuillConfiguration"></app-input-molecule>
+        
+        <app-button-atom btnValue="submit" type="button" (click)="submitForm()"  [groupName]="newArticle" [disabled]="!newArticle.valid" className="border bg-blue text-white p-2 rounded-lg w-40 mt-5 "></app-button-atom>
+       
+      </div>
+              
+    
+   
+</div>

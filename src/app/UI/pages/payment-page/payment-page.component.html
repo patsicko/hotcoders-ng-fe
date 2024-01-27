@@ -1,0 +1,26 @@
+<div class=" modal-content bg-white w-full h-full p-10 rounded-xl">
+
+    <div class="flex justify-between">
+      <div class="flex gap-8">
+        <div class="text-3xl font-bold p-8">
+            PAY WITH
+        </div>
+
+        <app-image-atom ngOptimizedImage source="../../../../assets/mtn.jpg" alt="mypic" className=" h-20 rounded-xl"></app-image-atom>
+      </div> 
+      
+      <div>
+        <fa-icon class="text-xl text-red font-black" (click)="closeForm(false)" [icon]="close"></fa-icon>
+      </div>
+    </div>
+    <div>Amount: {{price}}</div>
+      
+      <div id="conainer" class="container w-full">
+          
+            <app-input-molecule [inputProps]="phoneInput" [groupName]="payForm"  ></app-input-molecule>
+          
+            <app-button-atom btnValue="PAY" type="button" (click)="submitForm()" [groupName]="payForm" [disabled]="!payForm.valid" className="border bg-blue text-white p-2 mt-5 rounded-lg w-full md:w-40 "></app-button-atom>
+  
+        </div>
+        
+  </div>

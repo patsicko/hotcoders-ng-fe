@@ -1,0 +1,33 @@
+<div class=" modal-content bg-white w-full h-full p-10 rounded-xl">
+
+    <div class="flex justify-between">
+      <app-text-atom>Login</app-text-atom>  
+      <div>
+        <fa-icon class="text-xl text-red font-black" (click)="closeForm(false)" [icon]="close"></fa-icon>
+      </div>
+    </div>
+      
+      <div id="conainer" class="container w-full">
+        
+            <!-- <div id="g_id_onload"
+            data-client_id="63754100136-r3ga1asjit8hr55jl4edb18apeu1nr0s.apps.googleusercontent.com"
+            data-login_uri=""
+            data-callback=""
+            data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin"
+                data-type="standard"
+                data-size="large"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-shape="rectangular"
+                data-logo_alignment="left">
+            </div> -->
+          
+            <app-input-molecule [inputProps]="emailInput" [groupName]="login"  ></app-input-molecule>
+            <app-input-molecule [inputProps]="passwordInput" [groupName]="login"  ></app-input-molecule>
+            <app-button-atom btnValue="Login" type="button" (click)="submitForm()" [groupName]="login" [disabled]="!login.valid" className="border bg-blue text-white p-2 mt-5 rounded-lg w-full md:w-40 "></app-button-atom>
+  
+        </div>
+        
+  </div>

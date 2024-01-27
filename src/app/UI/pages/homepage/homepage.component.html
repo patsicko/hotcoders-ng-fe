@@ -1,0 +1,276 @@
+
+
+     
+     <div class="brand-container mt-auto p-20 md:w-full">
+
+        <div  *ngIf="showPaymentModel" class="modal-container fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50" >
+
+            <app-payment-page class="w-1/3" [price]="price"></app-payment-page>
+        </div>
+
+       
+
+        <div class="w-full my-20 md:flex justify-center gap-8 " >
+            
+            <app-image-atom ngOptimizedImage source="../../../../assets/robot.jpg" alt="mypic" className="w-100 mr-80 pt-12 rounded-xl"></app-image-atom>
+           
+
+
+            <div class="">
+               
+                <p class="brand  shadow p-2  text-2xl" [innerHTML]="displayedText"></p>
+                
+
+                <app-text-molecule 
+                source="../../../../assets/ido.gif"
+                textHeader="What We do"
+                text="We help you to dive deep in end-to-end web development, handling both the frontend and backend aspects of projects. 
+                Whether it's crafting engaging user interfaces  or designing robust server-side architectures, 
+                We bring a comprehensive skill set to the table. You can have a full access to all our packages buy clicking to the button below. "
+                textMoleculeClass="mt-10 w-full text-xl"
+                [price]="fullAccessPrice"
+                textHeaderClass="font-bold mx-10"
+                imageClass="h-10"           
+                >
+               
+               </app-text-molecule>
+
+               
+
+            </div>
+
+
+           
+           
+
+        
+        </div>
+
+
+       
+       
+
+        <div *ngIf="welcome" class="ido" >
+
+
+            <div class="lg:grid grid-cols-3 gap-8 text-xl" >
+
+
+               
+             <div  *ngFor="let article of articles">
+                <app-text-molecule 
+                source={{article.coverImage}}
+                textHeader={{article.blogTitle}}
+                text={{article.blogDescription}}
+                 price={{article.blogPrice}}
+                
+                textHeaderClass="font-bold"
+                imageClass="h-10 mx-3"
+                
+                >
+               
+               </app-text-molecule>
+             </div>
+
+              
+                
+                
+            
+<!-- 
+                <app-text-molecule 
+                 source="../../../../assets/react.png"
+                 textHeader="React"
+                 text="In the realm of React, I excel at developing modern and responsive user interfaces. 
+                 I harness the flexibility of React components to build engaging applications, employing state management
+                  libraries like Redux for efficient data handling. My commitment to writing clean and modular code ensures that React applications 
+                 I develop are not only visually appealing but also easy to maintain and extend."
+                 
+                 textHeaderClass="font-bold"
+                 imageClass="h-10 mx-3 rounded-md"
+                 
+                 >
+                
+                </app-text-molecule>
+
+
+
+                <app-text-molecule 
+                 source="../../../../assets/node.jpg"
+                 textHeader="Node"
+                 text="As a full-stack developer, I utilize Node.js to build server-side 
+                 applications and APIs with speed and efficiency. Leveraging the non-blocking 
+                 I/O nature of Node.js, I create scalable and high-performance backend solutions. 
+                 From RESTful APIs to real-time applications using WebSocket,
+                  I harness the versatility of Node.js to handle diverse backend requirements."
+                 
+                 textHeaderClass="font-bold"
+                 imageClass="h-10 mx-3 rounded-md"
+                 
+                 >
+                
+                </app-text-molecule>
+
+                <app-text-molecule 
+                source="../../../../assets/nest.png"
+                textHeader="NestJS"
+                text="NestJS is my framework of choice for building robust and scalable server-side applications. 
+                With its modular architecture and support for TypeScript, I develop maintainable and structured backend systems.
+                 NestJS allows me to seamlessly integrate with databases, handle authentication, and build APIs,
+                 ensuring that the backend of your application is as reliable as its frontend."
+                
+                textHeaderClass="font-bold"
+                imageClass="h-10 mx-3 rounded"
+                
+                >
+               
+               </app-text-molecule>
+
+                <app-text-molecule 
+                source="../../../../assets/ts.png"
+                textHeader="Typescript"
+                text="TypeScript is a fundamental tool in my arsenal, enhancing the development process by
+                 adding static typing to JavaScript. I leverage TypeScript to catch errors early in the development phase, 
+                 improve code readability, and facilitate collaboration in larger codebases. 
+                It enables me to build more resilient and scalable applications by providing a strong typing system."
+                
+                textHeaderClass="font-bold"
+                imageClass="h-10 mx-3"
+                
+                >
+               
+               </app-text-molecule>
+
+               <app-text-molecule 
+                source="../../../../assets/graphql.png"
+                textHeader="GraphQL"
+                text="My proficiency in GraphQL enables me to design efficient and flexible APIs, 
+                allowing clients to request exactly the data they need. I leverage the power of GraphQL
+                 to optimize data fetching, reduce over-fetching issues, and create a streamlined communication 
+                 channel between the frontend and backend. This results in faster, 
+                more responsive applications with a focus on enhancing the user experience."
+                
+                textHeaderClass="font-bold"
+                imageClass="h-10 mx-3"
+                
+                >
+               
+               </app-text-molecule>
+
+               <app-text-molecule 
+               source="../../../../assets/docker.png"
+               textHeader="Docker"
+               text="In my development workflow, I harness the containerization capabilities of Docker to ensure consistency 
+               and portability across different environments. 
+               By encapsulating applications and their dependencies in containers, I streamline the deployment process, 
+               enhance scalability, and simplify maintenance. Docker plays a crucial role in my DevOps practices, 
+               allowing for efficient collaboration and ensuring that applications run seamlessly from development to production environments."
+               
+               textHeaderClass="font-bold"
+               imageClass="h-10 mx-3"
+               
+               >
+              
+              </app-text-molecule>
+
+
+
+              <app-text-molecule 
+              source="../../../../assets/git.png"
+              textHeader=""
+              text="Version control is at the heart of my development workflow, 
+              with Git as the cornerstone. I leverage Git for tracking changes, 
+              collaborating with teams, and ensuring codebase integrity.
+               GitHub serves as my collaboration platform of choice, providing a robust ecosystem for version control,
+                issue tracking, and continuous integration, fostering efficient and transparent development processes.
+              "
+              
+              textHeaderClass="font-bold"
+              imageClass="h-10 mx-3"
+              
+              >
+             
+             </app-text-molecule>
+
+
+             <app-text-molecule 
+             source="../../../../assets/sql.jpg"
+             textHeader=" MySQL & PostgreSQL"
+             text="I have extensive experience working with relational databases, including MySQL and PostgreSQL. 
+             From designing normalized database schemas to optimizing queries,
+              I ensure the efficient storage and retrieval of data. Whether your project requires the familiarity of MySQL
+               or the advanced features of PostgreSQL, I bring a wealth of expertise to database management.
+             "
+             
+             textHeaderClass="font-bold"
+             imageClass="h-10 mx-3"
+             
+             >
+            
+            </app-text-molecule>
+
+            <app-text-molecule 
+            source="../../../../assets/orm.png"
+            textHeader=" TypeORM, Prisma, Sequelize"
+            text="I am proficient in a variety of ORMs (Object-Relational Mapping), including TypeORM,
+             Prisma, and Sequelize. These tools enable me to interact with databases using a convenient object-oriented syntax, 
+             abstracting the complexities of SQL. Whether it's defining models, executing queries, or handling migrations, 
+            I leverage these ORMs to streamline database interactions and enhance development efficiency.
+            "
+            
+            textHeaderClass="font-bold"
+            imageClass="h-10 mx-3"
+            
+            >
+           
+           </app-text-molecule>
+
+
+
+           <app-text-molecule 
+           source="../../../../assets/mongo.png"
+           textHeader=" & Mongoose"
+           text="For projects requiring a NoSQL approach, I utilize MongoDB along with Mongoose. 
+           This combination allows me to design flexible and scalable database structures, 
+           accommodating dynamic data requirements. Mongoose, as an ODM (Object-Document Mapping) library, 
+           simplifies interactions with MongoDB, enabling efficient data modeling and manipulation.
+           "
+           
+           textHeaderClass="font-bold text-2xl"
+           imageClass="h-10 mx-3"
+           
+           >
+          
+          </app-text-molecule>
+
+
+
+          <app-text-molecule 
+          source="../../../../assets/devops.png"
+          textHeader="DevOps"
+          text="In the realm of DevOps, I bring a holistic approach to software development, 
+          focusing on streamlining the development lifecycle. From continuous integration and continuous deployment (CI/CD) pipelines 
+          to efficient deployment strategies, I ensure that the deployment process is reliable and scalable. 
+          My DevOps practices aim to create a collaborative and automated development environment, enhancing the overall agility and reliability of software projects.
+          "
+          
+          textHeaderClass="font-bold text-2xl"
+          imageClass="h-10 mx-3"
+          
+          >
+         
+         </app-text-molecule>
+
+           
+
+
+            </div>
+            -->
+            
+           
+        </div>
+
+
+    </div>      
+    
+                 
+  

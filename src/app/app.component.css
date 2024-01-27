@@ -1,0 +1,11 @@
+.main{
+    position: absolute;
+    top: 25px;
+    height: auto;
+    width: 100vw;
+}
+
+.header{
+    position: fixed;
+    z-index: 10;
+}

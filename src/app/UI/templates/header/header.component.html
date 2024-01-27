@@ -1,0 +1,101 @@
+
+
+    <div [class]="isDark ? 'bg-light-gray text-white p-5  flex flex-row  items-center justify-around h-auto' : 'bg-sky p-5 text-black flex flex-row items-center justify-around h-auto'">
+
+        <div [class]="showFlex ? 'flex flex-col sticky md:hidden':'hidden'" >
+            <ng-container *ngFor="let route of routeList">
+                <app-routerlink [route]="route.route" [linkClass]="route.linkClass"  [linkText]="route.linkText" ></app-routerlink>
+            </ng-container>
+            
+
+         
+            <ng-container *ngIf="showSignupButton && !logedIn">
+                  
+                <button type="button" class="text-md md:text-xl px-3 w-28 rounded-md  hover:bg-dark-blue hover:bg-gray mt-3"   (click)="showSignupForm(true)">Signup</button>
+                </ng-container>
+                
+                <ng-container *ngIf="!logedIn">
+
+                    <button type="button" class="text-md md:text-xl px-3 w-28  rounded-md  hover:bg-dark-blue hover:bg-gray " (click)="showLoginForm(true)">Login</button>
+                </ng-container>
+                <div *ngIf="logedIn">
+                    <button type="button" class="text-md md:text-xl px-3 w-28 rounded-md  hover:bg-dark-blue hover:bg-gray" (click)="logOut()">Logout</button>
+                       
+                </div>   
+        </div>
+
+        <div  class="hidden md:flex mx-5 text-2xl font-bold  bg-blue text-white p-3 custom-box">
+            HotCoders
+        </div>
+            
+            <div class="hidden md:flex h-20 py-5 justify-around items-center " >
+                <ng-container *ngFor="let route of routeList">
+                    <app-routerlink [route]="route.route" [linkClass]="route.linkClass"  [linkText]="route.linkText" ></app-routerlink>
+                </ng-container>
+    
+             
+                    <ng-container *ngIf="showSignupButton && !logedIn">
+                  
+                    <button type="button" class="text-md md:text-xl px-5 py-2  rounded-md  hover:bg-dark-blue hover:bg-gray"   (click)="showSignupForm(true)">Signup</button>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="!logedIn">
+
+                        <button type="button" class="text-md md:text-xl px-5 py-2 rounded-md  hover:bg-dark-blue hover:bg-gray" (click)="showLoginForm(true)">Login</button>
+                    </ng-container>
+                    
+              
+            </div>
+            
+        <div class="flex flex-col mx-5 md:flex-row justify-around items-center w-1/4">
+            <div>
+                <fa-icon class="text-white text-xl" (click)="changeTheme()" *ngIf="isDark" [icon]="moon"></fa-icon>
+                <fa-icon class="text-white text-xl" (click)="changeTheme()" *ngIf="!isDark" [icon]="sun"></fa-icon>
+               
+            </div>
+
+
+            <div *ngIf="logedIn" class="flex flex-col mx-5 md:flex-row gap-6 items-center w-3/4">
+               <div class="flex flex-col md:flex-row  gap-2 items-center justify-center ">
+                <img
+                src="{{ socialUser?.photoUrl? socialUser.photoUrl:'../../../../../../assets/user.png' }}"
+                alt="User Photo"
+                referrerpolicy="no-referrer"
+                class="rounded-full h-8 w-8  object-cover border-2 border-gray-300 my-5 md:my-1 md:mx-2"
+                />
+                <div class="text-xl">
+                  
+                    {{ socialUser?.lastName ? socialUser.lastName : (logedIn.email ? logedIn.email.split('@')[0] : '') }}
+
+                  
+                </div>
+               </div>
+               <div *ngIf="logedIn">
+                <button type="button" class="text-md md:text-xl px-5 py-1 md:py-2 rounded-md my-5 hover:bg-gray mx-4" (click)="logOut()">Logout</button>
+                   
+            </div> 
+            </div>  
+        </div>
+
+        <ng-container *ngIf="!showFlex">
+            <button class="text-white text-xl md:hidden" (click)="toggleMenu()">
+                <fa-icon [icon]="bar"></fa-icon>
+              </button>
+        </ng-container>
+
+        <ng-container *ngIf="showFlex">
+            <button class="text-white text-xl md:hidden" (click)="toggleMenu()">
+                <fa-icon [icon]="close"></fa-icon>
+              </button>
+        </ng-container>
+       
+
+    </div>
+
+    
+
+
+
+
+
+

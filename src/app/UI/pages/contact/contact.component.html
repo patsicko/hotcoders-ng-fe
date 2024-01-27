@@ -1,0 +1,54 @@
+
+
+
+
+
+    <div class="text-2xl  w-full px-2 md:w-4/5 lg:w-1/2 mt-40 pb-36 contact ml-0 md:ml-20 lg:ml-80" >
+        <div class="flex flex-col mt-20 xl:flex-row gap-12 border rounded-lg p-5 bg-light-gray text-white">
+           <div>
+             Whant to hire me? <br>
+            Connect me to an opportunity? <br>
+            Involve me as a collaborator? <br>
+           </div>
+           <div>
+            
+            Tell me something? <br>
+            Contact me via this form
+           </div>
+    
+           
+    
+        </div>
+
+      
+        <div class="grid grid-cols-2 gap-6 w-full  ">
+     
+        
+             <app-input-molecule [inputProps]="nameInput" [groupName]="myForm"  ></app-input-molecule>
+             <app-input-molecule [inputProps]="emailInput" [groupName]="myForm" ></app-input-molecule>
+             <app-input-molecule [inputProps]="countryInput" [groupName]="addressForm" ></app-input-molecule>
+             <app-input-molecule [inputProps]="cityInput"  [groupName]="addressForm"></app-input-molecule>
+         
+     
+                          
+        </div>
+         
+        
+       <div class="w-full">
+         <app-input-molecule [inputProps]="textInput" [groupName]="myForm" [quillConfigurationModule]="QuillConfiguration" ></app-input-molecule>
+         
+         <app-button-atom btnValue="submit" type="button" (click)="submitForm()" [groupName]="myForm" [disabled]="!myForm.valid" className="border bg-blue text-white p-2 rounded-lg w-40 "></app-button-atom>
+       </div>
+       {{myForm.value.message}}
+       <div [innerHTML]="myForm.value.message">
+
+       </div>
+
+        
+     </div>
+    
+
+
+
+
+
