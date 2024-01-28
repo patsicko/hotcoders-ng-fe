@@ -15,10 +15,6 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginPageComponent implements OnInit {
 
   close=faX;
-  // @Output() closeLoginFormEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
-  // @Output() logedInEvent:EventEmitter<{ [key: string]: any }> = new EventEmitter<{ [key: string]: any }>();
-  
-
   constructor(
     private formBuilder:FormBuilder,
     private router: Router,
@@ -64,22 +60,16 @@ formData;
 
   submitForm(){
     this.formData=this.login.value;
-    this.authService.login(this.formData);
-   console.log("logedUser",this.formData)
-    localStorage.setItem("logedUser",JSON.stringify(this.formData))
-    
-    // const storedUser=JSON.parse(localStorage.getItem("user"));
-
-    // if(storedUser.email===this.formData.email && storedUser.password===this.formData.password){
-    //   this.router.navigate(['/admin-dashboard']);
-    //   this.logedInEvent.emit(this.formData)
-    //   this.closeLoginFormEvent.emit(false)
-    //   console.log(this.formData);
-    // }else{
-    //   alert("Invalid credentials");
-    // }
-    
-
+    this.authService.login(this.formData).subscribe({
+      next:(response=>{
+           localStorage.setItem("logedUser",JSON.stringify(response.user));
+           if(response.user.role==='admin'){
+            this.router.navigate(['/admin-dashboard']);
+           } 
+             
+      })
+    });
+  
   }
 
 }

@@ -1,16 +1,22 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { LoginData, ManualUser, User } from '../models/user.model';
+import { LoginData, ManualUser, SignupData, User } from '../models/user.model';
 import { SocialUser } from '@abacritt/angularx-social-login';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
-  manualUsers:ManualUser[]=[];
+  manualUsers:SignupData[]=[];
   socialUsers:SocialUser[]=[];
+  headers=new HttpHeaders({
+    'Content-Type':'application/json'
+  });
+  
 
  showSignupButtonEvent:EventEmitter<boolean>=new EventEmitter<boolean>();
  showSignupModelEvent:EventEmitter<boolean>=new EventEmitter<boolean>();
@@ -20,9 +26,9 @@ export class AuthService {
 
  showHeaderEvent:EventEmitter<boolean>=new EventEmitter<boolean>();
 
- onSignupSuccessEvent:EventEmitter<ManualUser[] | SocialUser[]> = new EventEmitter<ManualUser[] | ManualUser[]>();
+ onSignupSuccessEvent:EventEmitter<SignupData[] | SocialUser[]> = new EventEmitter<SignupData[]>();
 
- onLoginSuccessEvent:EventEmitter<ManualUser> = new EventEmitter <ManualUser>();
+ onLoginSuccessEvent:EventEmitter<any> = new EventEmitter <any>();
  
 
 
@@ -43,11 +49,18 @@ export class AuthService {
  }
 
 
- createManualUser(user:ManualUser){
-  this.manualUsers.push(user);
+ createManualUser(user:SignupData):Observable<any>{
+
+
+
+return this.http.post<SignupData>('http://localhost:8000/api/user/createUser',user,{headers:this.headers}).pipe(
+  tap(result=>{
+ this.manualUsers.push(user);
  console.log(this.manualUsers);
-  this.onSignupSuccessEvent.emit(this.manualUsers);
-  this.showSignupModelEvent.emit(false);
+this.onSignupSuccessEvent.emit(result);
+this.showSignupModelEvent.emit(false);
+  })
+)
  }
 
  createSocialUser(user:SocialUser){
@@ -56,23 +69,15 @@ export class AuthService {
  this.onSignupSuccessEvent.emit(this.socialUsers);
  }
  
+login(loginData:LoginData):Observable<any>{
 
-async login(loginData:LoginData){
-
-  console.log("loginData",loginData);
-  console.log("stored data",this.manualUsers)
- const user= await this.manualUsers.find(manualUser=>{
-   return manualUser.email===loginData.email && manualUser.password === loginData.password
- })
-console.log("user found",user)
- if(user){
- this.onLoginSuccessEvent.emit(user);
- this.showLoginModelEvent.emit(false);
- }else{
-  alert("Invalid credentials")
- }
- 
-
+return this.http.post<any>('http://localhost:8000/api/user/login',loginData,{headers:this.headers}).pipe(
+  tap(response=>{
+    console.log("response",response.user)
+    this.onLoginSuccessEvent.emit(response.user);
+   this.showLoginModelEvent.emit(false);
+  })
+)
 }
 
 }

@@ -5,7 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TInputProps } from '../../molecules/input-molecule/inputDTO';
 import { AuthService } from 'src/app/services/auth.service';
-import { ManualUser } from 'src/app/models/user.model';
+import { ManualUser,SignupData } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-signup-page',
@@ -19,7 +21,8 @@ export class SignupPageComponent  implements OnInit{
 
   constructor(
     private formBuilder:FormBuilder,
-    private authService:AuthService
+    private authService:AuthService,
+    private userService:UserService
   ){}
 
   firstNameInput:TInputProps={
@@ -38,7 +41,14 @@ export class SignupPageComponent  implements OnInit{
     controlName: 'lastName',
     
   }
-
+  phoneInput:TInputProps={
+    type: 'text',
+    placeholder: 'ex:078...',
+    className: 'border rounded p-2  w-full',
+    label: 'Phone',
+    controlName: 'phone',
+    
+  }
   emailInput:TInputProps={
     type: 'email',
     placeholder: 'email',
@@ -60,11 +70,12 @@ export class SignupPageComponent  implements OnInit{
  signupForm=this.formBuilder.group({
   firstName:['',[Validators.required]],
   lastName:['',[Validators.required]],
+  phone:['',[Validators.required]],
   email:['',[Validators.required, Validators.email]],
   password:['',[Validators.required]]
  })
 
-formData:ManualUser
+formData:SignupData
 
   ngOnInit() {
    
@@ -78,17 +89,19 @@ formData:ManualUser
   }
 
   submitForm(){
-    this.formData=this.signupForm.value as ManualUser;
-    console.log(this.formData);
-    localStorage.setItem("user",JSON.stringify(this.formData));
-    this.authService.createManualUser(this.formData);
-   
+    this.formData=this.signupForm.value as SignupData;
+    // console.log(this.formData);
+    // localStorage.setItem("user",JSON.stringify(this.formData));
+  this.authService.createManualUser(this.formData).subscribe({
+    next:(response)=>{
+      console.log("response",response)
+    },
+    error:(error)=>{
+      console.log(
+        error
+      )
+    }
+  });
 
   }
-
-  
- 
- 
-
- 
 }

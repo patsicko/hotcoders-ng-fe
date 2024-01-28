@@ -8,23 +8,10 @@
   </div>
     
     <div id="conainer" class="container w-full">
-      
-          <!-- <div id="g_id_onload"
-          data-client_id="63754100136-r3ga1asjit8hr55jl4edb18apeu1nr0s.apps.googleusercontent.com"
-          data-login_uri=""
-          data-callback=""
-          data-auto_prompt="false">
-          </div>
-          <div class="g_id_signin"
-              data-type="standard"
-              data-size="large"
-              data-theme="outline"
-              data-text="sign_in_with"
-              data-shape="rectangular"
-              data-logo_alignment="left">
-          </div> -->
+   
           <app-input-molecule [inputProps]="firstNameInput" [groupName]="signupForm"  ></app-input-molecule>
           <app-input-molecule [inputProps]="laststNameInput" [groupName]="signupForm"  ></app-input-molecule>
+          <app-input-molecule [inputProps]="phoneInput" [groupName]="signupForm"  ></app-input-molecule>
           <app-input-molecule [inputProps]="emailInput" [groupName]="signupForm"  ></app-input-molecule>
           <app-input-molecule [inputProps]="passwordInput" [groupName]="signupForm"  ></app-input-molecule>
           <app-button-atom btnValue="Signup" type="button" (click)="submitForm()" [groupName]="signupForm" [disabled]="!signupForm.valid" className="border bg-blue text-white p-2 mt-5 rounded-lg w-full md:w-40 "></app-button-atom>
