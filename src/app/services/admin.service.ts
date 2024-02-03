@@ -1,12 +1,23 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Article } from '../models/article.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor() { }
+  constructor(private http:HttpClient) {
+    const storedArticles = localStorage.getItem('articles');
+    if (storedArticles) {
+      this.articles = JSON.parse(storedArticles);
+    }
+   }
+
+   headers=new HttpHeaders({
+    'Content-Type':'application/json'
+  });
 
   articles:Article[]=[]
 
@@ -16,14 +27,21 @@ export class AdminService {
     this.showArticleFormEvent.emit(value)
   }
 
-  createArticle(article:Article){
-    this.articles.push(article);
-    console.log(this.articles);
-    localStorage.setItem("articles",JSON.stringify(this.articles))
+  createArticle(article:Article):Observable<any>{
+    console.log("submitted article",article);
+
+   return this.http.post<Article>("http://localhost:8000/api/blog/create", article, {headers:this.headers}).pipe(
+      tap(result=>{
+        console.log("result",result);
+        this.articles.push(article);
+       
+      })
+    )
+   
   }
 
-  getArticles(){
-    return this.articles;
+  getArticles():Observable<any>{
+    return this.http.get<any>("http://localhost:8000/api/blog/getAll",{headers:this.headers})
   }
 
 }

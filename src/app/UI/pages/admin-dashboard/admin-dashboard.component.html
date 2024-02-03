@@ -1,11 +1,7 @@
 <div class="dashboard ">
 
- 
+
  <app-new-article *ngIf="showArticleModel" class="fixed top-0 left-0 bg-black z-50 w-full h-full bg-opacity-60  " ></app-new-article>
-
-
-   
-
 
 <div class="dbheader h-40 fixed flex items-center justify-around bg-gray shadow-md shadow-white top-0 left-0 z-30  w-full">
     <div  class="hidden md:flex mx-5 text-2xl font-bold  bg-blue text-white p-3 custom-box">
@@ -35,12 +31,12 @@
         class="rounded-full h-8 w-8  object-cover border-2 border-gray-300 my-5 md:my-1 md:mx-2"
          />
 
-         <div class="font-black">
-            User
+         <div class="font-black" >
+            {{logedUser.role}}
          </div>
 
          <div class="font-black text-blue mx-10">
-            <button>Logout</button>
+            <button type="button" (click)="logout()">Logout</button>
          </div>
        </div>
 
@@ -57,8 +53,8 @@
          DASHBOARD
 
           <hr class=" mt-10">
-
-          <div class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer transition duration-900 ease-in-out"><fa-icon [icon]="userIcon" class="px-5  text-3xl "></fa-icon>  Users</div>
+          <button class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer transition duration-900 ease-in-out" type="button" (click)="goHome()"><fa-icon [icon]="home" class="px-5  text-3xl " ></fa-icon>  Home</button>
+          <button class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer transition duration-900 ease-in-out" type="button" (click)="getUsers()"><fa-icon [icon]="userIcon" class="px-5  text-3xl " ></fa-icon>  Users</button>
           <div class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer" (click)="showArticleList()"> <fa-icon [icon]="fileIcon" class="px-5  text-3xl h"></fa-icon>Articles</div>
 
           
@@ -81,8 +77,42 @@
 
             </div>
 
-            <div class="userTable shadow-md w-full h-3/4 p-5 justify-center items-center bg-white text-black rounded-xl mt-2">
-                table
+            <div class="userTable shadow-md w-full h-3/4 p-5 justify-center items-center bg-white text-black rounded-xl mt-2 overflow-auto">
+                <div class="overflow-x-auto">
+                    <table class="table-auto min-w-full divide-y divide-gray-200">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
+                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Admin Approval</th>
+                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Manager Approval</th>
+                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">MoMo Payment Response</th>
+                        </tr>
+                      </thead>
+                      <tbody class="bg-white divide-y divide-gray-200" *ngFor="let user of users">
+                        
+                        <tr>
+                          <td class="px-6 py-4 whitespace-nowrap">{{user.firstName}}</td>
+                          <td class="px-6 py-4 whitespace-nowrap">{{user.lastName}}</td>
+                          <td class="px-6 py-4 whitespace-nowrap">{{user.phone}}</td>
+                          <td class="px-6 py-4 whitespace-nowrap">{{user.email}}</td>
+                          <td class="px-6 py-4 whitespace-nowrap">{{user.role}}</td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                <button ngClass="" class="text-2xl p-1 w-32 rounded-md text-white" [ngClass]="{'bg-green': user.adminApproval, 'bg-red': !user.adminApproval}"(click)="adminApprove(user.id)">{{user.adminApproval}}</button></span>
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><button [ngClass]="{'bg-blue':user.managerApproval,'bg-red':!user.managerApproval}" class="text-2xl  p-1 w-32 rounded-md text-white" (click)="managerApproval(user.id)">{{user.managerApproval}}</button></span>
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap">{{user.momoPaymentResponse}}</td> 
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
             </div>
           
         </div>
@@ -90,5 +120,4 @@
     </div> 
 
 </div>
-
 

@@ -1,0 +1,7 @@
+<form #paymentForm>
+    <input type="text" placeholder="Card Number"  name="cardNumber" required>
+    <input type="text" placeholder="Expiry Month" name="expiryMonth" required>
+    <input type="text" placeholder="Expiry Year"  name="expiryYear" required>
+    <input type="text" placeholder="CVC"  name="cvc" required>
+    <button (click)="submitPayment()">Pay</button>
+  </form>

@@ -5,6 +5,9 @@ import { PaymentService } from 'src/app/services/payment.service';
 import { Router } from '@angular/router';
 
 import { TInputProps } from '../../molecules/input-molecule/inputDTO';
+import { Article } from 'src/app/models/article.model';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 
 @Component({
@@ -16,17 +19,19 @@ export class PaymentPageComponent implements OnInit{
 
   constructor( 
     private formBuilder:FormBuilder,
-    private paymentService:PaymentService
+    private paymentService:PaymentService,
+    private authService:AuthService
     ){}
 
     close=faX;
-   @Input() price:string="50";
+   @Input() blog:any;
 
     ngOnInit():void{
      
       this.paymentService.paymentEvent.subscribe((value)=>{
+        console.log("emmited value as blog",value)
        
-      this.price=value
+      this.blog=value
       })
     }
  
@@ -50,20 +55,20 @@ formData;
   }
 
   submitForm(){
-
+    this.authService.whenButtonClicked(true)
 
     this.formData=this.payForm.value;
-    console.log("price",this.price);
+    console.log("price",this.blog.blogPrice);
     console.log("phone",typeof(this.formData.phone))
 
      const clientData = {
-      amount: this.price,
+      amount: this.blog.blogPrice,
       currency: 'EUR',
       externalId: '078',
       partyIdType: 'MSISDN',
       partyId: this.formData.phone,
       payerMessage: 'Your momo pay is successful',
-      payeeNote: 'You can now access the course',
+      payeeNote:this.blog.blogTitle,
       payee: {
         partyIdType:'MSISDN', 
         partyId: '0784660905'
@@ -72,7 +77,35 @@ formData;
 
     this.paymentService.initiateMomoPayment(clientData).subscribe({
       next:(response)=>{
-        console.log("momopayResponse",response)
+        console.log("momopayResponse",response);
+
+       const userId=JSON.parse(localStorage.getItem('logedUser')).id;
+
+       console.log('logedId',userId);
+
+       this.paymentService.saveMomoPayment(userId,response).subscribe({
+        next:(payedUser)=>{
+          console.log("payed Uder",payedUser);
+
+          this.paymentService.blogSubscription(userId,this.blog.id).subscribe({
+            next:(response)=>{
+              console.log("subscribed user",response)
+            },
+            error:(error)=>{
+              console.log("subscription failed",error)
+            }
+          });
+
+          this.paymentService.closePaymentClicked(false)
+
+        },
+        error:(error)=>{
+          console.log("payment not saved",error)
+        }
+        
+        
+       })
+
       },
       error:(error)=>{
         console.log("momopay failed",error)

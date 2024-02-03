@@ -29,8 +29,14 @@ export class AuthService {
  onSignupSuccessEvent:EventEmitter<SignupData[] | SocialUser[]> = new EventEmitter<SignupData[]>();
 
  onLoginSuccessEvent:EventEmitter<any> = new EventEmitter <any>();
+
+ isLoadingEvent:EventEmitter<boolean>= new EventEmitter<boolean>();
  
 
+
+whenButtonClicked(value){
+  this.isLoadingEvent.emit(value);
+}
 
  signupButtonClicked(value:boolean){
   this.showSignupModelEvent.emit(value);
@@ -59,6 +65,8 @@ return this.http.post<SignupData>('http://localhost:8000/api/user/createUser',us
  console.log(this.manualUsers);
 this.onSignupSuccessEvent.emit(result);
 this.showSignupModelEvent.emit(false);
+this.showSignupButtonEvent.emit(false);
+this.showLoginButtonEvent.emit(true)
   })
 )
  }

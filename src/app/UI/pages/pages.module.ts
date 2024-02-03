@@ -21,6 +21,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { OrganismsModule } from '../organisms/organisms.module';
 import { PaymentPageComponent } from './payment-page/payment-page.component';
 import { PaymentService } from 'src/app/services/payment.service';
+import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
+import { MatInputModule } from '@angular/material/input';
+import { StripePaymentElementComponent } from 'ngx-stripe';
+import { UserPageComponent } from './user-page/user-page.component';
 
 
 
@@ -35,7 +39,9 @@ import { PaymentService } from 'src/app/services/payment.service';
         SignupPageComponent,
         LoginPageComponent,
         AdminDashboardComponent,
-        PaymentPageComponent
+        PaymentPageComponent,
+        StripeCheckoutComponent,
+        UserPageComponent
     ],
     exports: [
         AboutComponent,
@@ -71,7 +77,9 @@ import { PaymentService } from 'src/app/services/payment.service';
         SocialLoginModule,
         QuillModule,
         FontAwesomeModule,
-        OrganismsModule
+        OrganismsModule,
+       MatInputModule,
+      StripePaymentElementComponent
        
     ]
 })

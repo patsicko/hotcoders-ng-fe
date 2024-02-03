@@ -14,6 +14,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
+ 
+
   close=faX;
   constructor(
     private formBuilder:FormBuilder,
@@ -59,13 +61,16 @@ formData;
   }
 
   submitForm(){
+    this.authService.whenButtonClicked(true)
     this.formData=this.login.value;
     this.authService.login(this.formData).subscribe({
       next:(response=>{
            localStorage.setItem("logedUser",JSON.stringify(response.user));
-           if(response.user.role==='admin'){
+           if(response.user.role==='admin' || response.user.role==='manager'){
             this.router.navigate(['/admin-dashboard']);
-           } 
+           }else{
+            this.router.navigate(['/']);
+           }
              
       })
     });

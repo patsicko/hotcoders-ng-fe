@@ -22,6 +22,9 @@ import { TemplatesModule } from './UI/templates/templates.module';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxStripeModule } from 'ngx-stripe';
+
+import { StripeModule } from "stripe-angular"
 
 
 
@@ -49,7 +52,9 @@ import { HttpClientModule } from '@angular/common/http';
             positionClass: 'toast-top-right',
             preventDuplicates: true,
           }),
-        QuillModule.forRoot()
+        QuillModule.forRoot(),
+        NgxStripeModule.forRoot(),
+        StripeModule.forRoot("pk_test_51ObikEGT2Rq02fmKeeIZTWr0kILcXD4B7vXRRABhY93DiAF0a4jXTKLHrOqc4yT1dH5bbNUphiwdt3cOID03b6nr006SKdUlFU")
        
        
     ],

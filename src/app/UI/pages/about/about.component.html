@@ -1,220 +1,107 @@
 
-<div  class="text-2xl mx-20 mt-32  flex justify-around items-center" >
+<div  class="text-2xl mx-20 mt-32  flex flex-col gap-12 justify-around items-center" >
+  <button type="button" class="bg-blue text-white p-1 px-2 rounded-md" (click)="downloadPage()">Download invoice</button>
 
-    <div class="lg:grid grid-cols-3 gap-6 text-xl">
+ <div class="flex items-center justify-center items-center w-1/2 shadow-xl">
         
-        <app-text-molecule 
-        source="../../../../assets/about.png"
-        textHeader="About Me"
-        text=""
-        
-        textHeaderClass="font-bold"
-        imageClass="h-10 mx-3"
-        
-        >
-        <div>
-        Hello, I'm <b>MANIBAHO Patrick</b> , a proud graduate of the Andela Technical Leadership Program,
-        a transformative 9-month accelerator
-         sponsored by the Rwanda Ministry of ICT and Innovation. 
-        This rigorous program has equipped me with a comprehensive skill set and a deep understanding 
-        of full-stack development.
-
-        </div>
-       
-       </app-text-molecule>
-    
-
-        <app-text-molecule [showImage]="false"
-        
-         textHeader="🌐 Skills"
-         
-         
-         textHeaderClass="font-bold"
-         imageClass="h-10 mx-3 rounded-md"
-         
-         >
-
-         <div>
-            My expertise lies in full-stack development, and I thrive in JavaScript-based environments.
-            I'm proficient in technologies such as Node.js, Express, React, and TypeScript, enabling me to craft end-to-end solutions.
-             Additionally, my skills extend to GraphQL, MongoDB, Postgres, and Docker, giving me a versatile toolkit 
-             for building robust and scalable applications. Beyond coding, I have a strong foundation in software project management, Agile methodology, 
-           and the Scrum framework, complemented by essential soft skills crucial for effective collaboration.
+         <div class="flex flex-col items-center justify-center">
+          <div>Payment</div>
+          <div class="step step1  flex justify-center items-center w-40 h-40 rounded-full border ">
+            
+            <fa-icon *ngIf="step1Achieved" [icon]="check" class="text-blue text-8xl" ></fa-icon>
+            <div *ngIf="!step1Achieved"> Step 1</div>  
+          </div>
          </div>
-        
-        </app-text-molecule>
+          <fa-icon [icon]="listDot" class="text-blue"></fa-icon>
+          <fa-icon [icon]="listDot" class="text-blue"></fa-icon>
+          <fa-icon [icon]="listDot" class="text-red"> </fa-icon>
+          <fa-icon [icon]="listDot" class="text-red"></fa-icon>
+          <fa-icon [icon]="listDot"></fa-icon>
+          <div class="flex flex-col items-center justify-center">
+            <div>Admin approval</div>
+            <div class="step step1  flex justify-center items-center w-40 h-40 rounded-full border ">
+              
+              <fa-icon *ngIf="step2Achieved" [icon]="check" class="text-blue text-8xl" ></fa-icon>
+              <div *ngIf="!step2Achieved"> Step 2</div>
+              
+            </div>
+           </div>
 
+            <fa-icon [icon]="listDot" class="text-blue"></fa-icon>
+            <fa-icon [icon]="listDot"></fa-icon>
+            <fa-icon [icon]="listDot"> </fa-icon>
+            <fa-icon [icon]="listDot"></fa-icon>
+            <fa-icon [icon]="listDot"></fa-icon>
 
+        <div class="flex flex-col items-center justify-center">
+          <div>Manager approval</div>
+          <div class="step step1  flex justify-center items-center w-40 h-40 rounded-full border ">
+            
+            <fa-icon *ngIf="step3Achieved" [icon]="check" class="text-blue text-8xl" ></fa-icon>
+            <div *ngIf="!step3Achieved">Step 3</div>
+            
+          </div>
+         </div>
 
-        <app-text-molecule [showImage]="false"
-         
-         textHeader="Node"
-         text="As a full-stack developer, I utilize Node.js to build server-side 
-         applications and APIs with speed and efficiency. Leveraging the non-blocking 
-         I/O nature of Node.js, I create scalable and high-performance backend solutions. 
-         From RESTful APIs to real-time applications using WebSocket,
-          I harness the versatility of Node.js to handle diverse backend requirements."
-         
-         textHeaderClass="font-bold"
-         imageClass="h-10 mx-3 rounded-md"
-         
-         >
+        <hr>      
+ </div>
 
-         
-        
-        </app-text-molecule>
+ <div #contentToCapture  *ngIf="momoPaymentResponse?.data?.status?.status"  class="flex flex-col justify-center items-center rounded-xl shadow-xl w-1/2">
+  <div>
+    Payment invoice
+  </div>
 
-        <app-text-molecule 
-        source="../../../../assets/nest.png"
-        textHeader="NestJS"
-        text="NestJS is my framework of choice for building robust and scalable server-side applications. 
-        With its modular architecture and support for TypeScript, I develop maintainable and structured backend systems.
-         NestJS allows me to seamlessly integrate with databases, handle authentication, and build APIs,
-         ensuring that the backend of your application is as reliable as its frontend."
-        
-        textHeaderClass="font-bold"
-        imageClass="h-10 mx-3 rounded"
-        
-        >
-       
-       </app-text-molecule>
+  <div class=" px-5">
+   First Name :{{user.firstName}} <br>
+   Last Name : {{user.lastName}} <br>
 
-        <app-text-molecule 
-        source="../../../../assets/ts.png"
-        textHeader="Typescript"
-        text="TypeScript is a fundamental tool in my arsenal, enhancing the development process by
-         adding static typing to JavaScript. I leverage TypeScript to catch errors early in the development phase, 
-         improve code readability, and facilitate collaboration in larger codebases. 
-        It enables me to build more resilient and scalable applications by providing a strong typing system."
-        
-        textHeaderClass="font-bold"
-        imageClass="h-10 mx-3"
-        
-        >
-       
-       </app-text-molecule>
+   Phone number: {{user.phone}} <br>
 
-       <app-text-molecule 
-        source="../../../../assets/graphql.png"
-        textHeader="GraphQL"
-        text="My proficiency in GraphQL enables me to design efficient and flexible APIs, 
-        allowing clients to request exactly the data they need. I leverage the power of GraphQL
-         to optimize data fetching, reduce over-fetching issues, and create a streamlined communication 
-         channel between the frontend and backend. This results in faster, 
-        more responsive applications with a focus on enhancing the user experience."
-        
-        textHeaderClass="font-bold"
-        imageClass="h-10 mx-3"
-        
-        >
-       
-       </app-text-molecule>
+    <h1 class="text-2xl font-bold text-center mb-8 underline">Payment details</h1>
+    <div class="p-5 shadow-lg bg-gray mb-5" >
+      <table class="w-full mb-8  ">
+        <tr class="">
+            <th class="text-left py-2">Transaction ID:</th>
+            <td class="py-2">{{momoPaymentResponse.data.status.financialTransactionId}}</td>
+        </tr>
+        <tr>
+            <th class="text-left py-2">Reference ID:</th>
+            <td class="py-2">{{momoPaymentResponse.data.response.referenceId}}</td>
+        </tr>
+        <tr>
+            <th class="text-left py-2">Amount:</th>
+            <td class="py-2">{{momoPaymentResponse.data.status.amount}}</td>
+        </tr>
+        <tr>
+            <th class="text-left py-2">Payer:</th>
+            <td class="py-2">MSISDN: {{momoPaymentResponse.data.status.financialTransactionId}}
+            </td>
+        </tr>
+        <tr>
+            <th class="text-left py-2">Payer Message:</th>
+            <td class="py-2">{{momoPaymentResponse.data.status.payerMessage}}</td>
+        </tr>
+        <tr>
+            <th class="text-left py-2">Payee Note:</th>
+            <td class="py-2">{{momoPaymentResponse.data.status.payeeNote
+            }}</td>
+        </tr>
+        <tr>
+            <th class="text-left py-2">Status:</th>
+            <td class="py-2 text-green-600">{{momoPaymentResponse.data.status.status}}</td>
+        </tr>
+    </table>
 
-       <app-text-molecule 
-       source="../../../../assets/docker.png"
-       textHeader="Docker"
-       text="In my development workflow, I harness the containerization capabilities of Docker to ensure consistency 
-       and portability across different environments. 
-       By encapsulating applications and their dependencies in containers, I streamline the deployment process, 
-       enhance scalability, and simplify maintenance. Docker plays a crucial role in my DevOps practices, 
-       allowing for efficient collaboration and ensuring that applications run seamlessly from development to production environments."
-       
-       textHeaderClass="font-bold"
-       imageClass="h-10 mx-3"
-       
-       >
-      
-      </app-text-molecule>
-
-
-
-      <app-text-molecule 
-      source="../../../../assets/git.png"
-      textHeader=""
-      text="Version control is at the heart of my development workflow, 
-      with Git as the cornerstone. I leverage Git for tracking changes, 
-      collaborating with teams, and ensuring codebase integrity.
-       GitHub serves as my collaboration platform of choice, providing a robust ecosystem for version control,
-        issue tracking, and continuous integration, fostering efficient and transparent development processes.
-      "
-      
-      textHeaderClass="font-bold"
-      imageClass="h-10 mx-3"
-      
-      >
-     
-     </app-text-molecule>
-
-
-     <app-text-molecule 
-     source="../../../../assets/sql.jpg"
-     textHeader=" MySQL & PostgreSQL"
-     text="I have extensive experience working with relational databases, including MySQL and PostgreSQL. 
-     From designing normalized database schemas to optimizing queries,
-      I ensure the efficient storage and retrieval of data. Whether your project requires the familiarity of MySQL
-       or the advanced features of PostgreSQL, I bring a wealth of expertise to database management.
-     "
-     
-     textHeaderClass="font-bold"
-     imageClass="h-10 mx-3"
-     
-     >
-    
-    </app-text-molecule>
-
-    <app-text-molecule 
-    source="../../../../assets/orm.png"
-    textHeader=" TypeORM, Prisma, Sequelize"
-    text="I am proficient in a variety of ORMs (Object-Relational Mapping), including TypeORM,
-     Prisma, and Sequelize. These tools enable me to interact with databases using a convenient object-oriented syntax, 
-     abstracting the complexities of SQL. Whether it's defining models, executing queries, or handling migrations, 
-    I leverage these ORMs to streamline database interactions and enhance development efficiency.
-    "
-    
-    textHeaderClass="font-bold"
-    imageClass="h-10 mx-3"
-    
-    >
-   
-   </app-text-molecule>
-
-
-
-   <app-text-molecule 
-   source="../../../../assets/mongo.png"
-   textHeader=" & Mongoose"
-   text="For projects requiring a NoSQL approach, I utilize MongoDB along with Mongoose. 
-   This combination allows me to design flexible and scalable database structures, 
-   accommodating dynamic data requirements. Mongoose, as an ODM (Object-Document Mapping) library, 
-   simplifies interactions with MongoDB, enabling efficient data modeling and manipulation.
-   "
-   
-   textHeaderClass="font-bold text-2xl"
-   imageClass="h-10 mx-3"
-   
-   >
-  
-  </app-text-molecule>
-
-
-
-  <app-text-molecule 
-  source="../../../../assets/devops.png"
-  textHeader="DevOps"
-  text="In the realm of DevOps, I bring a holistic approach to software development, 
-  focusing on streamlining the development lifecycle. From continuous integration and continuous deployment (CI/CD) pipelines 
-  to efficient deployment strategies, I ensure that the deployment process is reliable and scalable. 
-  My DevOps practices aim to create a collaborative and automated development environment, enhancing the overall agility and reliability of software projects.
-  "
-  
-  textHeaderClass="font-bold text-2xl"
-  imageClass="h-10 mx-3"
-  
-  >
  
- </app-text-molecule>
-
-   
-
-
     </div>
+
+  </div>
+
+</div>
+
+</div> 
+
+
+ 
+
+

@@ -13,6 +13,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.authService.showSignupModelEvent.subscribe((value)=>{
       this.showModel=value;
+      this.authService.showHeaderEvent.subscribe((value)=>{
+        this.showHeader=value;
+      })
     });
 
     this.authService.onSignupSuccessEvent.subscribe((data)=>{
@@ -29,7 +32,7 @@ export class AppComponent implements OnInit {
       this.logedIn=user;
       if(this.logedIn.email==='admin@gmail.com'){
         this.router.navigate(['/admin-dashboard']);
-        this.showHeader=false;
+        
       }
     })
   }

@@ -89,6 +89,7 @@ formData:SignupData
   }
 
   submitForm(){
+    this.authService.whenButtonClicked(true)
     this.formData=this.signupForm.value as SignupData;
     // console.log(this.formData);
     // localStorage.setItem("user",JSON.stringify(this.formData));

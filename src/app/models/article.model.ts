@@ -1,5 +1,8 @@
 export interface Article{
-    coverImage:string,
+  
+    coverImage:any,
     blogTitle:string,
-    blogContent:string
+    blogPrice:string,
+    blogDescription:string,
+    blogContent:string,
 }

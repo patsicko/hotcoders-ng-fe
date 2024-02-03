@@ -13,6 +13,8 @@ import { Article } from 'src/app/models/article.model';
 })
 export class NewArticleComponent  {
 
+  formData:FormData;
+
 constructor(
   private formBuilder:FormBuilder, 
   private toaster:ToastrService,
@@ -27,16 +29,6 @@ this.adminService.showArticleForm(value)
 
 closeIcon=faX
 
-coverPhotoInput:TInputProps={
-
-
-    type: 'file',
-    placeholder: 'Cover image',
-    className: 'border-4 h-14 text-2xl rounded-lg p-2  w-full',
-    label: 'Cover Image',
-    controlName: 'coverImage',
-    
-  }
 
   blogTitleInput:TInputProps={
   
@@ -80,21 +72,84 @@ coverPhotoInput:TInputProps={
 
 
 newArticle=this.formBuilder.group({
-  coverImage:[''],
+  coverImage: [null],
   blogTitle:['',[Validators.required]],
   blogDescription:['',[Validators.required]],
   blogPrice:['',[Validators.required]],
   blogContent:['',[Validators.required]]
 })
 
+uploadImage(event: any) {
+  const file = (event.target as HTMLInputElement).files[0];
+ if(file){
+  const reader = new FileReader();
+  reader.onload=()=>{
+    this.newArticle.patchValue({
+      coverImage:reader.result
+    });
+  };
+  reader.readAsDataURL(file)
+ }
+ 
+}
 
-submitForm(){
+submitForm() {
 
-console.log('clicked')
-  
-  this.adminService.createArticle(this.newArticle.value as Article)
+
+//   this.formData = new FormData();
+//   this.formData.append('coverImage', this.newArticle.get('coverImage').value);
+//   this.formData.append('blogTitle', this.newArticle.get('blogTitle').value);
+//   this.formData.append('blogDescription', this.newArticle.get('blogDescription').value);
+//   this.formData.append('blogPrice', this.newArticle.get('blogPrice').value);
+//   this.formData.append('blogContent', this.newArticle.get('blogContent').value);
+
+
+// this.formData.forEach((value, key) => {
+//   console.log(`${key}: ${value}`);
+// });
+
+// const imagesrc=this.getImageUrl(this.newArticle.get('coverImage').value)
+
+// const article={
+//   coverImage:this.newArticle.get('coverImage').value,
+//   blogTitle:this.newArticle.get('blogTitle').value,
+//   blogDescription: this.newArticle.get('blogDescription').value,
+//   blogPrice:this.newArticle.get('blogPrice').value,
+//   blogContent:this.newArticle.get('blogContent').value
+// }
+
+
+if(this.newArticle.valid){
+  const formData = this.newArticle.value
+
+  this.adminService.createArticle(formData as Article).subscribe({
+    next:(response)=>{
+      console.log("created article",response)
+    },
+    error:(error)=>{
+      console.log("failed to create blog",error)
+    }
+  });
 
 }
+
+
+
+}
+
+
+
+getImageUrl(fileOrString: File | string): string {
+  if (fileOrString instanceof File) {
+    return URL.createObjectURL(fileOrString);
+  } else {
+    return '';
+  }
+}
+
+
+
+
 
 QuillConfiguration = {
   toolbar: [

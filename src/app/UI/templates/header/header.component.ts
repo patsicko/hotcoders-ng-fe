@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faSun,faMoon,faBars,faX,faBucket} from '@fortawesome/free-solid-svg-icons';
+import { Location } from '@angular/common';
+
 import {
   SocialAuthService,
   GoogleLoginProvider,
@@ -15,7 +17,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit {
   socialUser: SocialUser;
 
-  constructor(private socialAuthService: SocialAuthService, private authService:AuthService){}
+  constructor(private socialAuthService: SocialAuthService, private authService:AuthService, private location:Location){}
 
 
 sun=faSun
@@ -30,7 +32,7 @@ showFlex:boolean=false
       route:"/", linkClass:"text-md md:text-xl px-5 py-1 md:py-2 rounded-md  hover:bg-gray mx-4" , linkText:"Home"
     },
     {
-      route:"/about", linkClass:"text-md md:text-xl px-5 py-1 md:py-2 rounded-md  hover:bg-dark-blue hover:bg-gray mx-4" ,linkText:"About"
+      route:"/about", linkClass:"text-md md:text-xl px-5 py-1 md:py-2 rounded-md  hover:bg-dark-blue hover:bg-gray mx-4" ,linkText:"Payment status"
     },
     {
       route:"/blog", linkClass:"text-md md:text-xl px-5 py-1 md:py-2 rounded-md mt-3 hover:bg-dark-blue hover:bg-gray mx-4" , linkText:"blog"
@@ -71,9 +73,12 @@ showFlex:boolean=false
   logOut(): void {
     if(this.socialUser){
       this.socialAuthService?.signOut();
+
     }
+    localStorage.removeItem("logedUser");
    
     this.logedIn=null;
+    window.location.reload();
   }
 
   showSignupForm(value:boolean){
