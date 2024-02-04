@@ -65,6 +65,7 @@ formData;
     this.formData=this.login.value;
     this.authService.login(this.formData).subscribe({
       next:(response=>{
+        console.log("loged user with relations",response)
            localStorage.setItem("logedUser",JSON.stringify(response.user));
            if(response.user.role==='admin' || response.user.role==='manager'){
             this.router.navigate(['/admin-dashboard']);

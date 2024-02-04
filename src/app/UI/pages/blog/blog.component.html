@@ -1,1 +1,32 @@
-<p>blog works!</p>
+<div *ngIf="blogSubscriptions.length > 0" class="container mx-auto flex justify-center mt-32">
+    <div class="w-1/4 p-4 bg-gray h-full text-blue">
+      <div class="bg-gray-200 p-4">
+        <h2 class="text-lg font-semibold mb-4">Blogs Payed</h2>
+        <ul>
+          <li *ngFor="let blog of blogSubscriptions" (click)="select(blog)"
+              class="cursor-pointer py-2 hover:bg-gray-300">
+            {{ blog.blog.blogTitle }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="w-3/4 p-4">
+      <div *ngIf="blogSubscriptions.length > 0" class="bg-gray-200 p-4">
+        <h2 class="text-lg font-semibold mb-4">Selected Blog</h2>
+        <div *ngIf="selectedBlog && selectedBlog.blog" class="text-xl font-semibold mb-2">
+          {{ selectedBlog.blog.blogTitle }}
+          <img *ngIf="selectedBlog.blog.coverImage" [src]="selectedBlog.blog.coverImage" alt="Cover Image"
+               class="mb-2 max-w-full">
+          <p><strong>Price:</strong> {{ selectedBlog.blog.blogPrice }}</p>
+          <p><strong>Description:</strong> {{ selectedBlog.blog.blogDescription }}</p>
+          <strong>Content:</strong>
+          <div [innerHTML]="selectedBlog.blog.blogContent"></div>
+        </div>
+        <div *ngIf="!selectedBlog || !selectedBlog.blog">
+          <p>No blog selected.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
