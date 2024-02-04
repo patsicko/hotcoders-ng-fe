@@ -49,13 +49,16 @@
 
     <div class="text-2xl  w-full flex h-screen  bg-gray fixed overflow-y-auto " >
         
-        <div class="sidebar w-1/5 h-full p-5 bg-cyan  text-sky font-bold hover:bg-harmony pt-40 bg-midnight ">
+        <div class="sidebar w-1/5 h-full p-5 bg-cyan   text-sky font-bold hover:bg-harmony pt-40 bg-midnight ">
          DASHBOARD
 
           <hr class=" mt-10">
-          <button class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer transition duration-900 ease-in-out" type="button" (click)="goHome()"><fa-icon [icon]="home" class="px-5  text-3xl " ></fa-icon>  Home</button>
-          <button class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer transition duration-900 ease-in-out" type="button" (click)="getUsers()"><fa-icon [icon]="userIcon" class="px-5  text-3xl " ></fa-icon>  Users</button>
-          <div class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer" (click)="showArticleList()"> <fa-icon [icon]="fileIcon" class="px-5  text-3xl h"></fa-icon>Articles</div>
+
+          <div class=" border ">
+          <button class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer transition duration-900 ease-in-out" type="button" (click)="goHome()"><fa-icon [icon]="home" class="px-5  text-3xl " ></fa-icon>  Home</button> <br>
+          <button class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer transition duration-900 ease-in-out" type="button" (click)="getUsers()"><fa-icon [icon]="userIcon" class="px-5  text-3xl " ></fa-icon>  Users</button> <br>
+          <button class="mt-10   p-3 rounded hover:bg-sky hover:text-black text-sky font-bold cursor-pointer" type="button" (click)="showArticleList()"> <fa-icon [icon]="fileIcon" class="px-5  text-3xl h"></fa-icon>Articles</button>
+          </div>
 
           
         </div>

@@ -3,6 +3,7 @@ import { LoginData, ManualUser, SignupData, User } from '../models/user.model';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { log } from 'node:util';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,7 @@ this.showLoginButtonEvent.emit(true)
  }
  
 login(loginData:LoginData):Observable<any>{
+  console.log("dataaaaaaaaaaaa",loginData)
 
 return this.http.post<any>('http://localhost:8000/api/user/login',loginData,{headers:this.headers}).pipe(
   tap(response=>{

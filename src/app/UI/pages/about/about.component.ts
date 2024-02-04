@@ -54,12 +54,13 @@ pollingSubsription:Subscription
         if (user) {
           this.user = user;
           this.momoPaymentResponse = user.momoPaymentResponse ? JSON.parse(user.momoPaymentResponse) : null;
-          if (this.momoPaymentResponse && this.momoPaymentResponse.data) {
+          if (this.momoPaymentResponse && this.momoPaymentResponse.data && this.momoPaymentResponse.data.status && this.momoPaymentResponse.data.status.status) {
             console.log("user whose data to render", this.momoPaymentResponse.data.status);
+            this.step1Achieved = user.momoPaymentResponse;
+            this.step2Achieved = user.adminApproval;
+            this.step3Achieved = user.managerApproval;
           }
-          this.step1Achieved = user.momoPaymentResponse;
-          this.step2Achieved = user.adminApproval;
-          this.step3Achieved = user.managerApproval;
+         
         }
       },
       error: (error) => {

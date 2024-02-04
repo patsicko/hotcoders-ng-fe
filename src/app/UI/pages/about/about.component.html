@@ -1,6 +1,6 @@
 
 <div  class="text-2xl mx-20 mt-32  flex flex-col gap-12 justify-around items-center" >
-  <button type="button" class="bg-blue text-white p-1 px-2 rounded-md" (click)="downloadPage()">Download invoice</button>
+  <button *ngIf="momoPaymentResponse?.data?.status?.status" type="button" class="bg-blue text-white p-1 px-2 rounded-md" (click)="downloadPage()">Download invoice</button>
 
  <div class="flex items-center justify-center items-center w-1/2 shadow-xl">
         
@@ -46,7 +46,7 @@
         <hr>      
  </div>
 
- <div #contentToCapture  *ngIf="momoPaymentResponse?.data?.status?.status"  class="flex flex-col justify-center items-center rounded-xl shadow-xl w-1/2">
+ <div #contentToCapture  *ngIf="momoPaymentResponse?.data?.status?.status && step3Achieved"  class="flex flex-col justify-center items-center rounded-xl shadow-xl w-1/2">
   <div>
     Payment invoice
   </div>

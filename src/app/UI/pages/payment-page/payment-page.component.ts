@@ -85,8 +85,11 @@ formData;
 
        this.paymentService.saveMomoPayment(userId,response).subscribe({
         next:(payedUser)=>{
-          console.log("payed Uder",payedUser);
+          
+          const res=JSON.parse(payedUser?.momoPaymentResponse);
 
+
+          if(res?.data?.status?.financialTransactionId){
           this.paymentService.blogSubscription(userId,this.blog.id).subscribe({
             next:(response)=>{
               console.log("subscribed user",response)
@@ -95,7 +98,7 @@ formData;
               console.log("subscription failed",error)
             }
           });
-
+        }
           this.paymentService.closePaymentClicked(false)
 
         },
@@ -110,6 +113,7 @@ formData;
       error:(error)=>{
         console.log("momopay failed",error)
       }
+    
     } 
     )
 
